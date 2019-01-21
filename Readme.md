@@ -26,9 +26,13 @@ Remember to set your subdomain in this file.
 ## Start services
 Run the script install.sh to start every container (remember to set all environment variables in this file).
 
-Credits :
+# Credits :
 https://hub.docker.com/r/linuxserver/deluge/
+
 https://hub.docker.com/r/jenkins/jenkins
+
 https://github.com/jwilder/nginx-proxy
+
 https://github.com/atmoz/sftp
+
 https://wiki.js.org/
