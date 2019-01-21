@@ -1,0 +1,35 @@
+version: '3'
+services:
+  wikidb:
+    image: mongo:3
+    restart: always
+    expose:
+      - '27017'
+    command: '--smallfiles --bind_ip ::,0.0.0.0'
+    environment:
+      - 'MONGO_LOG_DIR=/dev/null'
+    volumes:
+      - /home/$USER/tools/wikijs/data/data:/data/db
+    networks:
+      - web
+  wikijs:
+    image: 'requarks/wiki:latest'
+    restart: always
+    depends_on:
+      - wikidb
+    ports:
+      - '5080:5080'
+    environment:
+      WIKI_ADMIN_EMAIL: $LETSENCRYPT_EMAIL
+      VIRTUAL_HOST: $HOST_WIKI
+      VIRTUAL_PORT: 5080
+      LETSENCRYPT_HOST: $HOST_WIKI
+      LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+    volumes:
+      - /home/$USER/tools/wikijs/install/config.yml:/var/wiki/config.yml
+      - /home/$USER/tools/wikijs/data/repo:/var/wiki/repo
+    networks:
+      - web
+networks:
+    web:
+      external: true

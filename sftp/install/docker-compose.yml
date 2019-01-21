@@ -1,0 +1,13 @@
+version: '3'
+services:
+    sftp:
+      image: atmoz/sftp:alpine
+      volumes:
+        - /home/$USER/downloads/complete:/home/$USER/share/downloads
+        - /home/$USER/tools:/home/$USER/share/tools
+      ports:
+        - "2222:22"
+      command: $USER:PASSWORD:1000
+networks:
+    web:
+      external: true

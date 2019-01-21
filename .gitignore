@@ -1,0 +1,12 @@
+# Don't track content of these folders
+
+backup/
+
+jenkins/data/*
+!jenkins/data/jobs
+
+nginx_webproxy/certificats/*
+!nginx_webproxy/certificats/.gitkeep
+
+wikijs/data/*
+wikijs/backup/*

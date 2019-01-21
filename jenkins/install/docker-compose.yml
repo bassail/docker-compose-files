@@ -1,0 +1,22 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    restart: always
+    ports:
+      - '5090:5090'
+      - '50000:50000'
+    volumes:
+      - /home/$USER/tools/jenkins/data:/var/jenkins_home
+      - /home/$USER/tools:/home/$USER_jenkins/tools
+    environment:
+      JENKINS_OPTS: "--httpPort=5090"
+      VIRTUAL_HOST: $HOST_JENKINS
+      VIRTUAL_PORT: 5090
+      LETSENCRYPT_HOST: $HOST_JENKINS
+      LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+    networks:
+      - web
+networks:
+    web:
+      external: true

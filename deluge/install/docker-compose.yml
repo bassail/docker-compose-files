@@ -1,0 +1,24 @@
+version: '3'
+services:
+  deluge:
+    image: linuxserver/deluge
+    restart: always
+    ports:
+      - '8112:8112'
+      - '58846:58846'
+    volumes:
+      - /home/$USER/tools/deluge/config:/config
+      - /home/$USER/downloads:/downloads
+    environment:
+      PGID: 1000
+      PUID: 1000
+      TZ: Europe/London
+      VIRTUAL_HOST: $HOST_DELUGE
+      VIRTUAL_PORT: 8112
+      LETSENCRYPT_HOST: $HOST_DELUGE
+      LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+    networks:
+      - web
+networks:
+    web:
+      external: true
